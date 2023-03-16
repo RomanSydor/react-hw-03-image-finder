@@ -49,7 +49,7 @@ class App extends Component {
 
       pixabayAPI.getImages(currentKeyword, currentPage).then((images) => {
         this.setState((prevState) => ({
-          images: prevState.images.concat(images.hits),
+          images: [...prevState.images, ...images.hits],
           status: Status.RESOLVED,
         })).catch((error) => this.setState({ error, status: Status.REJECTED }));
       });
