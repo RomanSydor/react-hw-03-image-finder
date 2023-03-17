@@ -47,12 +47,15 @@ class App extends Component {
     if (prevPage !== currentPage && !isNewSearch) {
       this.setState({ status: Status.PENDING });
 
-      pixabayAPI.getImages(currentKeyword, currentPage).then((images) => {
-        this.setState((prevState) => ({
-          images: [...prevState.images, ...images.hits],
-          status: Status.RESOLVED,
-        })).catch((error) => this.setState({ error, status: Status.REJECTED }));
-      });
+      pixabayAPI
+        .getImages(currentKeyword, currentPage)
+        .then((images) => {
+          this.setState((prevState) => ({
+            images: [...prevState.images, ...images.hits],
+            status: Status.RESOLVED,
+          }));
+        })
+        .catch((error) => this.setState({ error, status: Status.REJECTED }));
     }
   }
 
